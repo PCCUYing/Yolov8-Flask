@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPE 裝備檢測系統</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #eaf7f0 0%, #d4e9d4 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.15);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .header h2 {
+            color: #10743b;
+            font-size: 2rem;
+            margin: 0;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header h2:hover {
+            color: #4CAF50;
+        }
+
+        .upload-form {
+            background-color: #f8fbf8;
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #4caf50;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .upload-form:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.2);
+        }
+
+        .form-title {
+            color: #4caf50;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input {
+            margin-bottom: 15px;
+            padding: 12px;
+            width: 100%;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            transition: border-color 0.3s ease;
+            background-color: #ffffff;
+        }
+
+        .form-input:hover,
+        .form-input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        .form-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .form-button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .output-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .video {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #10743b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .back-button:hover {
+            background-color: #0d5c2f;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 116, 59, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header h2 {
+                font-size: 1.5rem;
+                padding-right: 80px;
+            }
+
+            .form-button {
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="/" class="back-button">返回</a>
+            <h2> PPE 裝備檢測系統 </h2>
+        </div>
+        
+        <div class="upload-form">
+            <h3 class="form-title">上傳圖片</h3>
+            <form action="/predict_img" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" class="form-input" accept="image/*">
+                <input type="submit" value="開始檢測" class="form-button">
+            </form>
+        </div>
+        
+        <div class="upload-form">
+            <h3 class="form-title">上傳影片</h3>
+            <form action="/predict_video" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" class="form-input" accept="video/*">
+                <input type="submit" value="開始檢測" class="form-button">
+            </form>
+        </div>
+        
+        {% if image_path %}
+        <div class="upload-form">
+            <h3 class="form-title">檢測結果</h3>
+            <img src="{{ url_for('static', filename=image_path) }}" class="output-img" alt="檢測結果">
+        </div>
+        {% endif %}
+    </div>
+
+    {% if video_path %}
+    <div class="container">
+        <div class="upload-form">
+            <h3 class="form-title">影片檢測結果</h3>
+            <div class="video-container">
+                <video class="video" controls>
+                    <source src="{{ url_for('static', filename=video_path) }}" type="video/mp4">
+                    您的瀏覽器不支援影片播放。
+                </video>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <script>
+        function startWebcamFeed() {
+            window.open("/webcam_feed", "_blank");
+        }
+    </script>
+</body>
+</html>

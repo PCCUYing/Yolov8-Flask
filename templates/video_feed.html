@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>即時視訊檢測</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #eaf7f0 0%, #d4e9d4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.15);
+            width: 90%;
+            max-width: 800px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        h2 {
+            color: #10743b;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .video-container {
+            width: 100%;
+            border-radius: 15px;
+            border: 3px solid #4caf50;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .video-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(76, 175, 80, 0.25);
+        }
+
+        .video-feed {
+            width: 100%;
+            height: auto;
+            display: block;
+            background-color: #f8fbf8;
+        }
+
+        .status-indicator {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: blink 1s infinite;
+        }
+        /* 新增檢測結果的樣式 */
+        .detection-results {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: rgba(76, 175, 80, 0.1);
+            border-radius: 10px;
+            font-size: 1.1rem;
+            color: #10743b;
+            font-weight: bold;
+        }
+
+        .detection-results span {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #10743b;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background-color: #0d5c2f;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 116, 59, 0.3);
+        }
+
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+
+            .back-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>即時視訊檢測</h2>
+        <div class="video-container">
+            <div class="status-indicator">
+                <span class="status-dot"></span>
+                即時檢測中
+            </div>
+            <img src="/webcam_feed" alt="即時視訊畫面" class="video-feed">
+        </div>
+        <div class="detection-results">
+            已檢測到的物件會顯示在影像上方
+        </div>
+        <div class="controls">
+            <a href="/" class="back-button">返回首頁</a>
+        </div>
+    </div>
+</body>
+</html>
