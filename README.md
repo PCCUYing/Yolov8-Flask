@@ -1,4 +1,4 @@
-# Flask YOLOv8 網頁應用
+# Flask YOLOv8 Web
 
 ## 簡介
 
