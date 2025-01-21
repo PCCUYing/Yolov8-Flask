@@ -11,9 +11,9 @@ app = Flask(__name__, static_folder='static')
 def index():
     return render_template('index.html')
 
-@app.route('/ppe')
-def ppe():
-    return render_template('PPE.html')  # Render PPE.html page
+@app.route('/object')
+def object():
+    return render_template('Object.html')  # Render PPE.html page
 
 @app.route("/predict_img", methods=["POST"])
 def predict_img():
@@ -33,12 +33,12 @@ def predict_img():
             image = Image.open(io.BytesIO(frame))
 
             # Perform object detection
-            yolo = YOLO('best.pt')
+            yolo = YOLO('yolo11n.pt')
             results = yolo(image, save=True)
             res_plotted = results[0].plot()
             output_path = os.path.join('static', f.filename)
             cv2.imwrite(output_path, res_plotted)
-            return render_template('PPE.html', image_path=f.filename)
+            return render_template('Object.html', image_path=f.filename)
 
     return "File format not supported or file not uploaded properly."
 
@@ -60,7 +60,7 @@ def predict_video():
             fourcc = cv2.VideoWriter_fourcc(*'avc1')
             output_path = os.path.join('static', f.filename)
             out = cv2.VideoWriter(output_path, fourcc, 30.0, (frame_width, frame_height))
-            yolo = YOLO('best.pt')
+            yolo = YOLO('yolo11n.pt')
             frames = [] 
             i = 0
             while cap.isOpened():
@@ -87,7 +87,7 @@ def predict_video():
             cap.release()
             out.release()
             cv2.destroyAllWindows()
-            return render_template('PPE.html', video_path=f.filename)
+            return render_template('Object.html', video_path=f.filename)
 
 @app.route("/webcam")
 def webcam():
@@ -97,7 +97,7 @@ def webcam():
 @app.route("/webcam_feed")
 def webcam_feed():
     cap = cv2.VideoCapture(0)
-    model = YOLO('best.pt')
+    model = YOLO('yolo11n.pt')
     
     def generate():
         while True:
@@ -125,6 +125,7 @@ def webcam_feed():
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
     return Response(generate(), mimetype='multipart/x-mixed-replace; boundary=frame')
+app.run(debug=False)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
