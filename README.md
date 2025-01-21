@@ -81,6 +81,7 @@
 
 ### 檢測結果
 ![Target detection](https://github.com/user-attachments/assets/8611d5c2-3c79-4e5e-83a9-062abfa18dd8)
+![image](https://github.com/user-attachments/assets/0bfbf655-7c9b-44e8-8c9d-5a36a087ea83)
 
 
 
@@ -88,7 +89,7 @@
 
 ## 貢獻
 
-歡迎提出 Issue 或提交 Pull Request，協助改善此專案！\
+歡迎提出 Issue 或提交 Pull Request，協助改善此專案！
 ---
 
 
