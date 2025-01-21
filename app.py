@@ -13,7 +13,7 @@ def index():
 
 @app.route('/object')
 def object():
-    return render_template('Object.html')  # Render PPE.html page
+    return render_template('Object.html')  # Render object.html page
 
 @app.route("/predict_img", methods=["POST"])
 def predict_img():
