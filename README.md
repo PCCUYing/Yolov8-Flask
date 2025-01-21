@@ -1,4 +1,4 @@
-# Flask YOLOv8 Web
+# Flask YOLOv11 Web
 
 ## 簡介
 
