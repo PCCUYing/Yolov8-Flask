@@ -77,10 +77,12 @@
 ## 截圖展示
 
 ### 主畫面
-![Home](https://github.com/user-attachments/assets/6e5586fb-a5c6-4301-9d8e-a3112985719d)
+![Home](https://github.com/user-attachments/assets/ce44a86b-dcec-44f7-830f-052eb5719a3b)
+
 
 ### 檢測結果
-![Target detection](https://github.com/user-attachments/assets/8611d5c2-3c79-4e5e-83a9-062abfa18dd8)
+![image](https://github.com/user-attachments/assets/38b3f763-13de-4380-8fad-74945807cee3)
+
 ![image](https://github.com/user-attachments/assets/0bfbf655-7c9b-44e8-8c9d-5a36a087ea83)
 
 
