@@ -43,8 +43,8 @@
 ### 2. 下載專案
 
    ```bash
-   git clone https://github.com/你的帳號/Flask-YOLOv8-App.git
-   cd Flask-YOLOv8-App
+   git clone https://github.com/Ying100390/Yolov11-Flask.git
+   cd Yolov11-Flask
    ```
 
 ### 3. 安裝依賴
